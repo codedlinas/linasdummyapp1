@@ -1,11 +1,20 @@
-import React from 'react';
+import React from 'react'
+import './App.css'
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="app">
+      <header className="app-header">
+        <h1>Todo List App</h1>
+        <p>Manage your tasks efficiently</p>
+      </header>
+      <main className="app-main">
+        <div className="todo-container">
+          <p>Ready to build your todo list!</p>
+        </div>
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
