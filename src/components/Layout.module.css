@@ -1,0 +1,155 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: var(--color-warm-cream);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background-color: rgba(250, 247, 242, 0.95);
+}
+
+.nav {
+  padding: var(--spacing-sm) 0;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+  color: var(--color-primary);
+}
+
+.logoIcon {
+  color: var(--color-primary);
+  font-size: 1.75rem;
+}
+
+.logoText {
+  letter-spacing: -0.02em;
+}
+
+.navLinks {
+  display: flex;
+  gap: var(--spacing-md);
+  list-style: none;
+}
+
+.navLink {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  color: var(--color-text-light);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+}
+
+.navLink.active {
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+}
+
+.navLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  background-color: var(--color-charcoal);
+  color: var(--color-warm-sand);
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-2xl);
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.footerText {
+  color: var(--color-warm-sand);
+  margin: 0;
+  opacity: 0.9;
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.footerLink {
+  color: var(--color-warm-sand);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.footerLink:hover {
+  opacity: 1;
+  color: var(--color-warm-sand);
+}
+
+.footerDivider {
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .navLinks {
+    gap: var(--spacing-sm);
+  }
+  
+  .navLink {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+  }
+  
+  .logoIcon {
+    font-size: 1.5rem;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    text-align: center;
+  }
+}
