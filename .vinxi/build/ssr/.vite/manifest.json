@@ -1,0 +1,53 @@
+{
+  "_index-9YqHOdpa.js": {
+    "file": "assets/index-9YqHOdpa.js",
+    "name": "index"
+  },
+  "src/routes/contact.tsx?pick=default&pick=$css": {
+    "file": "contact.js",
+    "name": "contact",
+    "src": "src/routes/contact.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-9YqHOdpa.js"
+    ]
+  },
+  "src/routes/features.tsx?pick=default&pick=$css": {
+    "file": "features.js",
+    "name": "features",
+    "src": "src/routes/features.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-9YqHOdpa.js"
+    ]
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "index.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-9YqHOdpa.js"
+    ]
+  },
+  "virtual:$vinxi/handler/ssr": {
+    "file": "ssr.js",
+    "name": "ssr",
+    "src": "virtual:$vinxi/handler/ssr",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/routes/contact.tsx?pick=default&pick=$css",
+      "src/routes/contact.tsx?pick=default&pick=$css",
+      "src/routes/features.tsx?pick=default&pick=$css",
+      "src/routes/features.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css"
+    ],
+    "css": [
+      "assets/ssr-DtgRPc49.css"
+    ]
+  }
+}
