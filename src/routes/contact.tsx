@@ -1,5 +1,5 @@
 import { Title } from "@solidjs/meta";
-import { createSignal, createEffect, Component, Show } from "solid-js";
+import { createSignal, createEffect, Component, Show, onCleanup } from "solid-js";
 import Layout from "~/components/Layout";
 import styles from "./contact.module.css";
 
@@ -151,9 +151,11 @@ export default function Contact() {
       setTouched(new Set<string>());
       
       // Reset success message after 5 seconds
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
+      
+      onCleanup(() => clearTimeout(timeoutId));
     } catch (error) {
       console.error("Form submission error:", error);
     } finally {
