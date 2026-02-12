@@ -1,0 +1,26 @@
+{
+  "name": "solidstart-webapp",
+  "version": "1.0.0",
+  "description": "A 3-page SolidStart webapp with warm earth tones design",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.14.7",
+    "@solidjs/start": "^1.0.10",
+    "solid-js": "^1.9.2",
+    "vinxi": "^0.5.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
