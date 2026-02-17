@@ -1,306 +1,206 @@
 import { Title } from "@solidjs/meta";
-import { createSignal, createEffect, Component, Show, onCleanup } from "solid-js";
-import Layout from "~/components/Layout";
-import styles from "./contact.module.css";
-
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  subject?: string;
-  message?: string;
-}
+import { createSignal } from "solid-js";
 
 export default function Contact() {
-  const [formData, setFormData] = createSignal<FormData>({
+  const [formData, setFormData] = createSignal({
     name: "",
     email: "",
-    subject: "",
     message: ""
   });
-  
-  const [errors, setErrors] = createSignal<FormErrors>({});
-  const [touched, setTouched] = createSignal<Set<string>>(new Set());
-  const [isSubmitting, setIsSubmitting] = createSignal(false);
-  const [submitSuccess, setSubmitSuccess] = createSignal(false);
-  
-  // Email validation regex
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-  
-  // Validate form on data change
-  createEffect(() => {
-    const data = formData();
-    const newErrors: FormErrors = {};
-    
-    // Validate name
-    if (touched().has('name')) {
-      if (!data.name.trim()) {
-        newErrors.name = "Name is required";
-      } else if (data.name.trim().length < 2) {
-        newErrors.name = "Name must be at least 2 characters";
-      }
-    }
-    
-    // Validate email
-    if (touched().has('email')) {
-      if (!data.email.trim()) {
-        newErrors.email = "Email is required";
-      } else if (!validateEmail(data.email)) {
-        newErrors.email = "Please enter a valid email address";
-      }
-    }
-    
-    // Validate subject
-    if (touched().has('subject')) {
-      if (!data.subject.trim()) {
-        newErrors.subject = "Subject is required";
-      } else if (data.subject.trim().length < 3) {
-        newErrors.subject = "Subject must be at least 3 characters";
-      }
-    }
-    
-    // Validate message
-    if (touched().has('message')) {
-      if (!data.message.trim()) {
-        newErrors.message = "Message is required";
-      } else if (data.message.trim().length < 10) {
-        newErrors.message = "Message must be at least 10 characters";
-      }
-    }
-    
-    setErrors(newErrors);
-  });
-  
-  const handleInputChange = (field: keyof FormData, value: string) => {
+
+  const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
-  
-  const handleBlur = (field: string) => {
-    setTouched(prev => {
-      const newSet = new Set(prev);
-      newSet.add(field);
-      return newSet;
-    });
-  };
-  
-  const handleSubmit = async (e: Event) => {
+
+  const handleSubmit = (e: Event) => {
     e.preventDefault();
-    
-    // Mark all fields as touched
-    setTouched(new Set<string>(['name', 'email', 'subject', 'message']));
-    
-    // Trigger validation
-    const data = formData();
-    const validationErrors: FormErrors = {};
-    
-    if (!data.name.trim()) {
-      validationErrors.name = "Name is required";
-    } else if (data.name.trim().length < 2) {
-      validationErrors.name = "Name must be at least 2 characters";
-    }
-    
-    if (!data.email.trim()) {
-      validationErrors.email = "Email is required";
-    } else if (!validateEmail(data.email)) {
-      validationErrors.email = "Please enter a valid email address";
-    }
-    
-    if (!data.subject.trim()) {
-      validationErrors.subject = "Subject is required";
-    } else if (data.subject.trim().length < 3) {
-      validationErrors.subject = "Subject must be at least 3 characters";
-    }
-    
-    if (!data.message.trim()) {
-      validationErrors.message = "Message is required";
-    } else if (data.message.trim().length < 10) {
-      validationErrors.message = "Message must be at least 10 characters";
-    }
-    
-    setErrors(validationErrors);
-    
-    // If there are errors, don't submit
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-    
-    // Simulate form submission
-    setIsSubmitting(true);
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Success
-      setSubmitSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-      });
-      setTouched(new Set<string>());
-      
-      // Reset success message after 5 seconds
-      const timeoutId = setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
-      
-      onCleanup(() => clearTimeout(timeoutId));
-    } catch (error) {
-      console.error("Form submission error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Validation will be added later
+    console.log("Form submitted:", formData());
   };
-  
+
+  const pageStyles = {
+    minHeight: "100vh",
+    backgroundColor: "#1a1a2e",
+    color: "#e0e0e0",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  };
+
+  const containerStyles = {
+    maxWidth: "600px",
+    margin: "0 auto",
+    padding: "60px 20px"
+  };
+
+  const headerStyles = {
+    textAlign: "center" as const,
+    marginBottom: "50px"
+  };
+
+  const titleStyles = {
+    fontSize: "2.5rem",
+    fontWeight: "700",
+    color: "#ffffff",
+    marginBottom: "12px"
+  };
+
+  const subtitleStyles = {
+    fontSize: "1.1rem",
+    color: "#a0a0a0",
+    maxWidth: "400px",
+    margin: "0 auto",
+    lineHeight: "1.6"
+  };
+
+  const formStyles = {
+    backgroundColor: "#242444",
+    borderRadius: "16px",
+    padding: "40px",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)"
+  };
+
+  const formGroupStyles = {
+    marginBottom: "24px"
+  };
+
+  const labelStyles = {
+    display: "block",
+    fontSize: "0.9rem",
+    fontWeight: "500",
+    color: "#e0e0e0",
+    marginBottom: "8px"
+  };
+
+  const inputStyles = {
+    width: "100%",
+    padding: "14px 16px",
+    fontSize: "1rem",
+    backgroundColor: "#1a1a2e",
+    border: "2px solid #3d3d5c",
+    borderRadius: "8px",
+    color: "#e0e0e0",
+    outline: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    boxSizing: "border-box" as const
+  };
+
+  const textareaStyles = {
+    ...inputStyles,
+    resize: "vertical" as const,
+    minHeight: "150px"
+  };
+
+  const buttonStyles = {
+    width: "100%",
+    padding: "16px 24px",
+    fontSize: "1rem",
+    fontWeight: "600",
+    backgroundColor: "#8b5cf6",
+    color: "#ffffff",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "background-color 0.2s ease, transform 0.1s ease",
+    marginTop: "8px"
+  };
+
+  const buttonHoverStyles = {
+    backgroundColor: "#7c3aed"
+  };
+
   return (
-    <Layout>
-      <Title>Contact Us - Terra</Title>
+    <div style={pageStyles}>
+      <Title>Contact Us</Title>
       
-      <section class={styles.contactHero}>
-        <div class="container">
-          <div class={styles.heroContent}>
-            <h1 class={styles.heroTitle}>Get in Touch</h1>
-            <p class={styles.heroSubtitle}>
-              Have a question or want to work together? We'd love to hear from you.
-            </p>
+      <div style={containerStyles}>
+        <header style={headerStyles}>
+          <h1 style={titleStyles}>Get in Touch</h1>
+          <p style={subtitleStyles}>
+            Have a question or want to work together? We'd love to hear from you.
+          </p>
+        </header>
+
+        <form onSubmit={handleSubmit} style={formStyles}>
+          <div style={formGroupStyles}>
+            <label for="name" style={labelStyles}>Name</label>
+            <input
+              type="text"
+              id="name"
+              style={inputStyles}
+              value={formData().name}
+              onInput={(e) => handleInputChange('name', e.currentTarget.value)}
+              placeholder="Your full name"
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "#8b5cf6";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(139, 92, 246, 0.2)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "#3d3d5c";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            />
           </div>
-        </div>
-      </section>
-      
-      <section class={styles.contactSection}>
-        <div class="container">
-          <div class={styles.contactContent}>
-            <div class={styles.contactInfo}>
-              <h2 class={styles.infoTitle}>Let's Connect</h2>
-              <p class={styles.infoText}>
-                Fill out the form and we'll get back to you as soon as possible. 
-                We're here to help bring your ideas to life.
-              </p>
-              
-              <div class={styles.infoCards}>
-                <div class={styles.infoCard}>
-                  <div class={styles.infoIcon}>✉</div>
-                  <h3 class={styles.infoCardTitle}>Email</h3>
-                  <p class={styles.infoCardText}>hello@terra.design</p>
-                </div>
-                
-                <div class={styles.infoCard}>
-                  <div class={styles.infoIcon}>◎</div>
-                  <h3 class={styles.infoCardTitle}>Response Time</h3>
-                  <p class={styles.infoCardText}>Within 24 hours</p>
-                </div>
-              </div>
-            </div>
-            
-            <div class={styles.formContainer}>
-              <Show when={submitSuccess()}>
-                <div class={styles.successMessage}>
-                  <div class={styles.successIcon}>✓</div>
-                  <h3 class={styles.successTitle}>Message Sent!</h3>
-                  <p class={styles.successText}>Thank you for reaching out. We'll get back to you soon.</p>
-                </div>
-              </Show>
-              
-              <form onSubmit={handleSubmit} class={styles.form} novalidate>
-                <div class={styles.formGroup}>
-                  <label for="name" class={styles.label}>
-                    Name <span class={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    class={styles.input}
-                    classList={{ [styles.inputError]: !!errors().name }}
-                    value={formData().name}
-                    onInput={(e) => handleInputChange('name', e.currentTarget.value)}
-                    onBlur={() => handleBlur('name')}
-                    placeholder="Your full name"
-                  />
-                  <Show when={errors().name}>
-                    <span class={styles.errorMessage}>{errors().name}</span>
-                  </Show>
-                </div>
-                
-                <div class={styles.formGroup}>
-                  <label for="email" class={styles.label}>
-                    Email <span class={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    class={styles.input}
-                    classList={{ [styles.inputError]: !!errors().email }}
-                    value={formData().email}
-                    onInput={(e) => handleInputChange('email', e.currentTarget.value)}
-                    onBlur={() => handleBlur('email')}
-                    placeholder="your@email.com"
-                  />
-                  <Show when={errors().email}>
-                    <span class={styles.errorMessage}>{errors().email}</span>
-                  </Show>
-                </div>
-                
-                <div class={styles.formGroup}>
-                  <label for="subject" class={styles.label}>
-                    Subject <span class={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    class={styles.input}
-                    classList={{ [styles.inputError]: !!errors().subject }}
-                    value={formData().subject}
-                    onInput={(e) => handleInputChange('subject', e.currentTarget.value)}
-                    onBlur={() => handleBlur('subject')}
-                    placeholder="What's this about?"
-                  />
-                  <Show when={errors().subject}>
-                    <span class={styles.errorMessage}>{errors().subject}</span>
-                  </Show>
-                </div>
-                
-                <div class={styles.formGroup}>
-                  <label for="message" class={styles.label}>
-                    Message <span class={styles.required}>*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    class={styles.textarea}
-                    classList={{ [styles.inputError]: !!errors().message }}
-                    value={formData().message}
-                    onInput={(e) => handleInputChange('message', e.currentTarget.value)}
-                    onBlur={() => handleBlur('message')}
-                    placeholder="Tell us more about your project or question..."
-                    rows="6"
-                  />
-                  <Show when={errors().message}>
-                    <span class={styles.errorMessage}>{errors().message}</span>
-                  </Show>
-                </div>
-                
-                <button
-                  type="submit"
-                  class={styles.submitButton}
-                  disabled={isSubmitting()}
-                >
-                  {isSubmitting() ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            </div>
+
+          <div style={formGroupStyles}>
+            <label for="email" style={labelStyles}>Email</label>
+            <input
+              type="email"
+              id="email"
+              style={inputStyles}
+              value={formData().email}
+              onInput={(e) => handleInputChange('email', e.currentTarget.value)}
+              placeholder="you@example.com"
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "#8b5cf6";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(139, 92, 246, 0.2)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "#3d3d5c";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            />
           </div>
-        </div>
-      </section>
-    </Layout>
+
+          <div style={formGroupStyles}>
+            <label for="message" style={labelStyles}>Message</label>
+            <textarea
+              id="message"
+              style={textareaStyles}
+              value={formData().message}
+              onInput={(e) => handleInputChange('message', e.currentTarget.value)}
+              placeholder="Tell us what's on your mind..."
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "#8b5cf6";
+                e.currentTarget.style.boxShadow = "0 0 0 3px rgba(139, 92, 246, 0.2)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "#3d3d5c";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            style={buttonStyles}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = buttonHoverStyles.backgroundColor;
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = buttonStyles.backgroundColor;
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
