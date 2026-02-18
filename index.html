@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudPing - Global Cloud Latency Testing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1F2937;
+            background: #FFFFFF;
+        }
+        
+        .contaner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-section img {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563EB;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 100px;
+            background: linear-gradient(135deg, #DBEAFE 0%, #FFFFFF 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #1E40AF;
+            margin-bottom: 24px;
+        }
+        
+        .hero .tagline {
+            font-size: 20px;
+            color: #4B5563;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #2563EB;
+            color: #FFFFFF;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #1E40AF;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #FFFFFF;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            color: #1E40AF;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: #F9FAFB;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: #60A5FA;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #DBEAFE;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            font-size: 16px;
+            color: #6B7280;
+            line-height: 1.7;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #DBEAFE 0%, #FFFFFF 100%);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 16px;
+            border: 2px solid #E5E7EB;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            border-color: #2563EB;
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #2563EB;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+        }
+        
+        .pricing-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 12px;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2563EB;
+            margin: 20px 0;
+        }
+        
+        .price-period {
+            font-size: 18px;
+            color: #6B7280;
+            font-weight: 400;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 12px 0;
+            color: #4B5563;
+            font-size: 16px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+        
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #10B981;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        .pricing-button {
+            display: block;
+            width: 100%;
+            background: #2563EB;
+            color: #FFFFFF;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .pricing-button:hover {
+            background: #1E40AF;
+        }
+        
+        .pricing-button.secondary {
+            background: #F9FAFB;
+            color: #2563EB;
+            border: 2px solid #2563EB;
+        }
+        
+        .pricing-button.secondary:hover {
+            background: #DBEAFE;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1F2937;
+            color: #D1D5DB;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #60A5FA;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero .tagline {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="contaner">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="logo.png">
+                    <span class="logo-text">CloudPing</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="contaner">
+            <h1>Test Cloud Latency from Anywhere</h1>
+            <p class="tagline">Measure real-time network performance across all major cloud providers in seconds. Make informed decisions with accurate latency data.</p>
+            <a href="#pricing" class="cta-button">Get Started Free</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="contaner">
+            <h2 class="section-title">Why Choose CloudPing?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Coverage</h3>
+                    <p>Test latency across 50+ data centers spanning AWS, Azure, Google Cloud, and more. Get comprehensive insights into network performance worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Testing</h3>
+                    <p>Instant ping results with millisecond accuracy. Monitor network performance in real-time and identify the fastest regions for your applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Visualize latency patterns with interactive charts and historical data. Export reports and share insights with your team effortlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="contaner">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0<span class="price-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li>10 tests per day</li>
+                        <li>Basic latency metrics</li>
+                        <li>Access to 20+ regions</li>
+                        <li>Community support</li>
+                    </ul>
+                    <button class="pricing-button secondary">Start Testing</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Pro</h3>
+                    <div class="price">$29<span class="price-period">/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited tests</li>
+                        <li>Advanced analytics & reports</li>
+                        <li>All 50+ global regions</li>
+                        <li>Historical data access</li>
+                        <li>Priority support</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="pricing-button">Get Pro Access</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="contaner">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CloudPing</h4>
+                    <p>Global cloud latency testing made simple. Optimize your infrastructure with real-time performance data.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CloudPing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
