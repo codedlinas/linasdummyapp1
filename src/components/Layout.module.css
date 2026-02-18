@@ -124,6 +124,7 @@
 .footerLink:hover {
   opacity: 1;
   color: var(--color-warm-sand);
+  text-decoration: underline;
 }
 
 .footerDivider {
