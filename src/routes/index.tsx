@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Title, Meta } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import Layout from "~/components/Layout";
 import styles from "./index.module.css";
@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <Layout>
       <Title>Terra - Where Design Meets Nature</Title>
+      <Meta name="description" content="Terra brings warmth and elegance to digital design with natural earth tones. Experience the perfect harmony of nature and modern aesthetics." />
       
       <section class={styles.hero}>
         <div class="container">
