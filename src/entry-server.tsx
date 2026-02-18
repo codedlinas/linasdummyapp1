@@ -8,6 +8,7 @@ export default createHandler(() => (
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="description" content="Terra - Where design meets nature. Experience the perfect harmony of warm earth tones and modern design for your digital world." />
           <link rel="icon" href="/favicon.ico" />
           {assets}
         </head>
