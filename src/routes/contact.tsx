@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Title, Meta } from "@solidjs/meta";
 import { createSignal, createEffect, Component, Show, onCleanup } from "solid-js";
 import Layout from "~/components/Layout";
 import styles from "./contact.module.css";
@@ -166,6 +166,7 @@ export default function Contact() {
   return (
     <Layout>
       <Title>Contact Us - Terra</Title>
+      <Meta name="description" content="Get in touch with the Terra team. We'd love to hear about your project and help bring your ideas to life." />
       
       <section class={styles.contactHero}>
         <div class="container">
