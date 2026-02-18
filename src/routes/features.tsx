@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Meta, Title } from "@solidjs/meta";
 import { Component, For } from "solid-js";
 import Layout from "~/components/Layout";
 import styles from "./features.module.css";
@@ -72,6 +72,7 @@ export default function Features() {
   return (
     <Layout>
       <Title>Features - Terra</Title>
+      <Meta name="description" content="Discover Terra's powerful features: responsive design, fast performance, warm aesthetics, modern framework, accessibility, and SEO optimization." />
       
       <section class={styles.featuresHero}>
         <div class="container">
