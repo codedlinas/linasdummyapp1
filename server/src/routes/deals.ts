@@ -37,41 +37,51 @@ const mockDeals: Deal[] = JSON.parse(
 
 const router = Router();
 
-function seedDealsIfEmpty(): void {
-  const db = getDb();
-  const count = db.prepare('SELECT COUNT(*) as count FROM deals').get() as { count: number };
-  
-  if (count.count === 0) {
-    const insert = db.prepare(`
-      INSERT INTO deals (
-        origin_location_code, destination_location_code, origin_city,
-        destination_city, price, currency, departure_date, return_date,
-        airline, discount, is_hot
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+let seeded = false;
 
-    for (const deal of mockDeals) {
-      insert.run(
-        deal.originLocationCode,
-        deal.destinationLocationCode,
-        deal.originCity,
-        deal.destinationCity,
-        deal.price,
-        deal.currency,
-        deal.departureDate,
-        deal.returnDate,
-        deal.airline,
-        deal.discount,
-        deal.isHot ? 1 : 0
-      );
+function seedDealsIfEmpty(): void {
+  if (seeded) return;
+  seeded = true;
+  
+  try {
+    const db = getDb();
+    const count = db.prepare('SELECT COUNT(*) as count FROM deals').get() as { count: number };
+    
+    if (count.count === 0) {
+      const insert = db.prepare(`
+        INSERT INTO deals (
+          origin_location_code, destination_location_code, origin_city,
+          destination_city, price, currency, departure_date, return_date,
+          airline, discount, is_hot
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+
+      for (const deal of mockDeals) {
+        insert.run(
+          deal.originLocationCode,
+          deal.destinationLocationCode,
+          deal.originCity,
+          deal.destinationCity,
+          deal.price,
+          deal.currency,
+          deal.departureDate,
+          deal.returnDate,
+          deal.airline,
+          deal.discount,
+          deal.isHot ? 1 : 0
+        );
+      }
+      console.log('Seeded deals table with mock data');
     }
+  } catch (error) {
+    console.error('Failed to seed deals:', error);
+    seeded = false;
   }
 }
 
-seedDealsIfEmpty();
-
 router.get('/', (req: Request, res: Response) => {
   try {
+    seedDealsIfEmpty();
     const { hot, limit = 10 } = req.query;
     const db = getDb();
 
@@ -122,6 +132,7 @@ router.get('/', (req: Request, res: Response) => {
 
 router.get('/trending', (_req: Request, res: Response) => {
   try {
+    seedDealsIfEmpty();
     const db = getDb();
     
     const deals = db.prepare(`
