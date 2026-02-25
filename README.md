@@ -1,109 +1,113 @@
-# Terra - SolidStart Webapp
+# FlyDeal - Cheap Flight Finder
 
-A beautifully crafted 3-page webapp built with SolidStart, featuring warm earth tones and modern design principles.
+A modern web application to find cheap flight tickets, compare prices, and set price alerts.
 
 ## Features
 
-- **Modern Framework**: Built with SolidJS and SolidStart for reactive performance
-- **Warm Design System**: Carefully curated earth tone palette (terra cotta, desert clay, warm sand)
-- **Responsive Layout**: Mobile-first design that adapts to all screen sizes
-- **Client-side Validation**: Real-time form validation with proper error handling
-- **Fast Performance**: Code splitting and optimized loading
-- **SEO Optimized**: Server-side rendering for better search engine visibility
-
-## Pages
-
-1. **Home** - Landing page with hero section and value propositions
-2. **Features** - Comprehensive feature grid showcasing capabilities
-3. **Contact** - Interactive form with client-side validation
+- **Flight Search** - Search flights by origin, destination, dates, and passengers
+- **Price Comparison** - Compare prices from multiple airlines in a unified list
+- **Price Alerts** - Set alerts to get notified when prices drop below your target
+- **Deal Dashboard** - View trending deals and popular routes
+- **Search History** - Re-run previous searches with one click
 
 ## Tech Stack
 
-- **Framework**: SolidStart
-- **Language**: TypeScript
-- **Styling**: CSS Modules
-- **Routing**: File-based routing
-- **Build Tool**: Vinxi
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18 or higher
-- npm or yarn
-
-### Installation
-
-```bash
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Visit `http://localhost:3000` to view the application.
-
-### Build
-
-```bash
-npm run build
-```
-
-### Production
-
-```bash
-npm start
-```
+- **Backend**: Node.js, Express, TypeScript, SQLite (better-sqlite3)
+- **Frontend**: React 18, TypeScript, Vite, TailwindCSS
+- **Flight Data**: Amadeus Flight Offers Search API (with mock data fallback)
 
 ## Project Structure
 
 ```
-src/
-├── routes/               # File-based routes
-│   ├── index.tsx        # Landing page
-│   ├── features.tsx     # Features page
-│   └── contact.tsx      # Contact page
-├── components/          # Reusable components
-│   └── Layout.tsx       # Main layout with navigation
-├── app.tsx              # App root
-├── app.css              # Global styles
-├── entry-client.tsx     # Client entry point
-└── entry-server.tsx     # Server entry point
+flydeal/
+├── server/          # Express API server
+│   └── src/
+│       ├── routes/     # API route handlers
+│       ├── services/   # Amadeus API client
+│       └── mocks/      # Mock flight data
+├── client/          # React frontend
+│   └── src/
+│       ├── pages/      # Page components
+│       ├── components/ # Reusable components
+│       └── api.ts      # API client
+└── types/           # Shared TypeScript types
 ```
 
-## Design System
+## Quick Start
 
-### Colors
+### Prerequisites
 
-- **Primary**: Terra Cotta (#E07856)
-- **Primary Dark**: Burnt Sienna (#C65D3B)
-- **Background**: Warm Cream (#FAF7F2)
-- **Surface**: Warm Sand (#F4E4D7)
-- **Text**: Charcoal (#3A3632)
-- **Accent**: Desert Clay (#D4A574)
+- Node.js 18+
+- npm 8+
 
-### Typography
+### Installation
 
-- **Font**: System font stack for optimal performance
-- **Scale**: Responsive type scale from 0.875rem to 3.5rem
+```bash
+# Install all dependencies
+npm install
 
-### Spacing
+# Install server dependencies
+cd server && npm install
 
-- **System**: 8px base unit with consistent scale
-- **Breakpoints**: Mobile-first (768px, 1024px)
+# Install client dependencies  
+cd ../client && npm install
+```
 
-## Form Validation
+### Development
 
-The contact form includes comprehensive client-side validation:
+Start both server and client in development mode:
 
-- **Required fields**: Name, Email, Subject, Message
-- **Email format**: RFC-compliant email validation
-- **Character limits**: Minimum lengths enforced
-- **Real-time feedback**: Errors shown on blur and submission
-- **Visual indicators**: Error states with helpful messages
+```bash
+# From root directory
+npm run dev
+```
+
+Or run them separately:
+
+```bash
+# Terminal 1 - Start server (port 3001)
+cd server && npm run dev
+
+# Terminal 2 - Start client (port 5173)
+cd client && npm run dev
+```
+
+The client is configured to proxy `/api` requests to the server.
+
+### Using Live Amadeus API
+
+By default, the app uses mock flight data. To use the live Amadeus API:
+
+1. Sign up at [developers.amadeus.com](https://developers.amadeus.com)
+2. Create an app to get API credentials
+3. Set environment variables:
+
+```bash
+export AMADEUS_API_KEY=your_api_key
+export AMADEUS_API_SECRET=your_api_secret
+```
+
+Then restart the server.
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/flights/search` | Search for flights |
+| GET | `/api/flights/status` | Check API mode (live/mock) |
+| GET | `/api/deals` | Get trending deals |
+| POST | `/api/alerts` | Create a price alert |
+| GET | `/api/alerts` | List price alerts |
+| DELETE | `/api/alerts/:id` | Delete a price alert |
+| GET | `/api/history` | Get search history |
+
+## Screenshots
+
+The application features:
+- A modern, clean UI with sky blue accents
+- Mobile-responsive design
+- Skeleton loaders during data fetching
+- Accessible components with proper focus states
 
 ## License
 
