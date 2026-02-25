@@ -1,5 +1,10 @@
 # Dependencies
-node_modules/
+node_modules
+
+# Database
+*.db
+*.db-shm
+*.db-wal/
 
 # Production build
 dist/
