@@ -1,0 +1,22 @@
+[
+  { "iataCode": "JFK", "name": "John F. Kennedy International Airport", "city": "New York", "country": "United States" },
+  { "iataCode": "LAX", "name": "Los Angeles International Airport", "city": "Los Angeles", "country": "United States" },
+  { "iataCode": "ORD", "name": "O'Hare International Airport", "city": "Chicago", "country": "United States" },
+  { "iataCode": "DFW", "name": "Dallas/Fort Worth International Airport", "city": "Dallas", "country": "United States" },
+  { "iataCode": "DEN", "name": "Denver International Airport", "city": "Denver", "country": "United States" },
+  { "iataCode": "SFO", "name": "San Francisco International Airport", "city": "San Francisco", "country": "United States" },
+  { "iataCode": "SEA", "name": "Seattle-Tacoma International Airport", "city": "Seattle", "country": "United States" },
+  { "iataCode": "ATL", "name": "Hartsfield-Jackson Atlanta International Airport", "city": "Atlanta", "country": "United States" },
+  { "iataCode": "BOS", "name": "Boston Logan International Airport", "city": "Boston", "country": "United States" },
+  { "iataCode": "MIA", "name": "Miami International Airport", "city": "Miami", "country": "United States" },
+  { "iataCode": "LAS", "name": "Harry Reid International Airport", "city": "Las Vegas", "country": "United States" },
+  { "iataCode": "PHX", "name": "Phoenix Sky Harbor International Airport", "city": "Phoenix", "country": "United States" },
+  { "iataCode": "MSP", "name": "Minneapolis-Saint Paul International Airport", "city": "Minneapolis", "country": "United States" },
+  { "iataCode": "DTW", "name": "Detroit Metropolitan Wayne County Airport", "city": "Detroit", "country": "United States" },
+  { "iataCode": "PHL", "name": "Philadelphia International Airport", "city": "Philadelphia", "country": "United States" },
+  { "iataCode": "LHR", "name": "London Heathrow Airport", "city": "London", "country": "United Kingdom" },
+  { "iataCode": "CDG", "name": "Paris Charles de Gaulle Airport", "city": "Paris", "country": "France" },
+  { "iataCode": "FRA", "name": "Frankfurt Airport", "city": "Frankfurt", "country": "Germany" },
+  { "iataCode": "AMS", "name": "Amsterdam Airport Schiphol", "city": "Amsterdam", "country": "Netherlands" },
+  { "iataCode": "NRT", "name": "Narita International Airport", "city": "Tokyo", "country": "Japan" }
+]
